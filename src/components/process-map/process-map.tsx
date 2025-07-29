@@ -51,11 +51,11 @@ const layoutNodesManually = (
 
   const nodeMultipliers: Record<string, number> = {
     req: 100,
-    eval: 100,
-    prov: 93,
-    reeval: 114,
-    decide: 114,
-    end: 100,
+    eval: isWorkflowList ? 99 : 100,
+    prov: isWorkflowList ? 90 : 93,
+    reeval: isWorkflowList ? 113 : 114,
+    decide: isWorkflowList ? 113 : 114,
+    end: isWorkflowList ? 99 : 100,
   };
 
   const nodeSizeMultipliers: Record<string, { width: number; height: number }> =
@@ -181,7 +181,7 @@ const layoutNodesManually = (
       targetPosition: "top",
       sourcePosition: "bottom",
       position: {
-        x: pos.x,
+        x: isWorkflowList && node.id === "decide" ? pos.x + 2 : pos.x,
         y: pos.y + verticalOffset,
       },
       data: {
